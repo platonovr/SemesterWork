@@ -1,0 +1,15 @@
+{% extends "EventApp/base.html" %}
+
+
+{% block page %}
+
+    <ul class="nav nav-pills nav-stacked" role="tablist" style="width: 50%;">
+        <li style="display: inline-block;" role="presentation"><a href="{% url 'events' %}">События</a></li>
+        <li style="display: inline-block;" role="presentation"><a href="{% url 'create_event' %}">Создать</a></li>
+        <li role="presentation"><a href="{% url 'job:tasks' %}">Задачи</a></li>
+        <li role="presentation"><a href="{% url 'settings' %}">Настройки</a></li>
+        <li role="presentation"><a href="#">Цели</a></li>
+        <li role="presentation"><a href="#">Долги и счета</a></li>
+    </ul>
+
+{% endblock %}

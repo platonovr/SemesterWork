@@ -1,0 +1,43 @@
+{% extends "EventApp/base.html" %}
+
+
+{% block content %}
+    <div class="h1" style="margin-left: 10px;">
+        События текущей недели
+
+    </div>
+    {% if events %}
+        <ul class="list-group" style="width: 50%">
+            {% for event in events %}
+                <div class="event">
+                    <li class="list-group-item pull-left" style="display: inline-block;">
+                        <div class="list-group-item h3">  {{ event.time }} <a href="{% url 'event_details' event.id %}">Кто
+                            идет?</a><br> <br></div>
+                        {{ event.description }}<br>
+
+                    </li>
+                    <div class="table pull-right" style="display: inline-block; width: 50%;">
+                        <table class="table table-responsive">
+                            <tbody>
+                            <tr>
+                                <th>Важная деталь</th>
+                                <td>{{ event.time }}</td>
+                            </tr>
+                            <tr>
+                                <th>Блабла</th>
+                                <td>{{ event.description }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p> Nothing to show</p>
+
+    {% endif %}
+
+
+{% endblock %}

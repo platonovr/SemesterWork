@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link href="{{ STATIC_URL }}bootstrap-3.2.0-dist/css/bootstrap.css" rel="stylesheet">
+    {% block head %}
+        <div class="page page-header" style="border-bottom: 2px #000000;text-align: center; ">
+            {% block title %}
+                Hello, {{ user }}
+            {% endblock %}
+        </div>
+        {% block menu %}
+            <div class="nav navbar" style="text-align: center;">
+                <a href="{% url 'menu' %}">На главную</a><br>
+                <a href="{% url 'exit' %}">Выйти</a>
+            </div>
+        {% endblock %}
+    {% endblock %}
+</head>
+<body>
+{% block page %}
+    {% block content %}
+    {% endblock %}
+{% endblock %}
+</body>
+<footer class="navbar-fixed-bottom">
+    {% block footer %}
+        <div class="navbar-inner" style="text-align: center;">
+            {% block copyright %}
+                Platonov Roman Inc(c)
+            {% endblock %}
+        </div>
+    {% endblock %}
+</footer>
+</html>
