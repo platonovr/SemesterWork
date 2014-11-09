@@ -22,7 +22,7 @@ def no_auth_please(v):
 
 @login_required(login_url=reverse_lazy("sign_in"))
 def menu(request):
-    return render(request, "EventApp/menu.html", {"user": "Roman"})
+    return render(request, "EventApp/menu.html", {"user": request.user.username})
 
 
 @login_required(login_url=reverse_lazy("sign_in"))
@@ -66,6 +66,7 @@ def sign_in(request):
         f = LoginForm()
         context = {"f": f}
         return render(request, "EventApp/login.html", context)
+
 
 @login_required
 def exit(request):
