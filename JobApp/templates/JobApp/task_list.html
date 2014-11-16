@@ -1,7 +1,97 @@
 {% extends 'EventApp/base.html' %}
 
 {% block page %}
+    <style type="text/css">#integration-list ul {
+        padding: 0;
+        margin: 20px 0;
+        font-family: Arial, sans serif;
+        color: #555;
+    }
 
-    Здесь будут задачи
+    #integration-list ul > li {
+        list-style: none;
+        border-top: 1px solid #ddd;
+        display: block;
+        padding: 15px;
+        overflow: hidden;
+    }
+
+    #integration-list ul:last-child {
+        border-bottom: 1px solid #ddd;
+    }
+
+    #integration-list ul > li:hover {
+        background: #efefef;
+    }
+
+    .button {
+        padding: 8px 12px;
+        font-size: 14px;
+        background: #ccc;
+        display: block: width : 200 px;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    .expand {
+        display: block;
+        text-decoration: none;
+        color: #555;
+        cursor: pointer;
+    }
+
+    h2 {
+        padding: 0;
+        margin: 0 0 5px 0;
+        font-size: 18px;
+    }
+
+    span {
+        font-size: 14px;
+    }
+
+    .detail {
+        margin: 20px 0 0 0;
+        display: none;
+        line-height: 22px;
+    }
+
+    .right-arrow {
+        width: 10px;
+        height: 10px;
+        float: left;
+        font-weight: bold;
+        font-size: 20px;
+        margin: 15px 15px 0 0;
+    }
+    </style>
+    <div id="integration-list">
+        {% for t in task_list %}
+
+
+            <ul>
+                <li>
+                    <a class="expand" href="{% url 'job:task_details' t.id %}">
+                        <div class="right-arrow">+</div>
+                        <div class="icon london"></div>
+                        <h2>{{ t.name }}
+                        </h2>
+
+                        <span>{{ t.hours }}</span>
+                    </a>
+
+                    <div class="detail">
+                        <div><span>{{ t.description }}</span>
+                        </div>
+                        <br/>
+
+                        <span class="button">Connect</span>
+                    </div>
+                </li>
+
+
+            </ul>
+        {% endfor %}
+    </div>
 
 {% endblock %}

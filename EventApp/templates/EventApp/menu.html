@@ -8,8 +8,11 @@
         <li style="display: inline-block;" role="presentation"><a href="{% url 'create_event' %}">Создать</a></li>
         <li role="presentation"><a href="{% url 'job:tasks' %}">Задачи</a></li>
         <li role="presentation"><a href="{% url 'settings' %}">Настройки</a></li>
-        <li role="presentation"><a href="#">Цели</a></li>
-        <li role="presentation"><a href="#">Долги и счета</a></li>
+        <li role="presentation"><a href="{% url 'places' %}">Места</a></li>
+        <li role="presentation"><a href="{% url 'types' %}">Типы событий</a></li>
+
+        <li role="presentation"><a href="{% url 'job:goals' %}">Цели</a></li>
+        <li role="presentation"><a href="{% url 'job:bills' %}">Долги и счета</a></li>
     </ul>
 
 {% endblock %}

@@ -1,0 +1,21 @@
+{% extends "EventApp/base.html" %}
+
+{% block page %}
+    <form action="{% url 'create_type' %}">
+        <input type="submit" class="btn btn-info" value="Создать категорию"/>
+    </form>
+    {% if types %}
+        <ul class="list-group" style="width: 50%">
+
+            {% for t in types %}
+                <h2>{{ t.name }}</h2>
+                <div class="list-group-item h3">
+                    <img src="{{ MEDIA_URL }}{{ t.icon }}" width="128px;" height="128px;">
+                </div>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p> No available types</p>
+    {% endif %}
+
+{% endblock %}

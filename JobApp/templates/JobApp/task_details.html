@@ -1,0 +1,15 @@
+{% extends 'EventApp/base.html' %}
+{% block content %}
+    <h1>Task Completion</h1>
+    <div class="cont">
+
+        <progress id="progress-bar" min="1" max="100" value="0"></progress>
+        <span class="first border-change"></span>
+        <span class="second"></span>
+        <span class="third"></span>
+        <span class="fourth"></span>
+        <br>
+        {{ task.name }}<br>{{ task.description }}<br>{{ task.hours }} hours
+        <p class="percent">0% Complete</p>
+    </div>
+{% endblock %}

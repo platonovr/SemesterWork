@@ -5,7 +5,7 @@ from django.db import models
 
 
 class UserProfile(models.Model):
-    photo = models.ImageField()
+    photo = models.ImageField(upload_to='avatars')
     phone_number = models.TextField()
     vk = models.TextField()
     gender = models.CharField(max_length=140)
@@ -15,12 +15,13 @@ class UserProfile(models.Model):
 
 class Type(models.Model):
     name = models.CharField(max_length=64)
-    icon = models.ImageField()
+    icon = models.ImageField(upload_to='types')
 
 
 class Place(models.Model):
+    name = models.CharField(max_length=64, blank=True, null=True)
     coordinates = models.CharField(max_length=128)
-    photo = models.ImageField()
+    photo = models.ImageField(upload_to='places')
     description = models.CharField(max_length=1024)
     url = models.URLField()
 

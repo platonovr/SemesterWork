@@ -2,7 +2,7 @@
 
 {% block page %}
     <div class="page-header">
-        Какое-то очень крутое событие
+        {{ event.time }}
     </div>
 
 
@@ -12,16 +12,19 @@
             Список записавшихся
 
             <tbody>
-            <tr>
-                <td>Человек 1</td>
-                <td>8999999999</td>
-                <td><a href="#">перейти</a></td>
-            </tr>
-            <tr>
-                <td>Человек 2</td>
-                <td>12822828</td>
-                <td><a href="#">перейти</a></td>
-            </tr>
+            {% for user in event.user.all %}
+                <tr>
+                    <td>{{ user }}</td>
+                    <td>{{ user.userprofile.phone_number }}</td>
+                    <td><a href="{{ user.userprofile.vk }}">Профиль Вк</a></td>
+
+                </tr>
+                <tr>
+                    <td>Человек 2</td>
+                    <td>12822828</td>
+                    <td><a href="#">перейти</a></td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
 

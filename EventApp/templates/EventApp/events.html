@@ -9,28 +9,19 @@
     {% if events %}
         <ul class="list-group" style="width: 50%">
             {% for event in events %}
-                <div class="event">
-                    <li class="list-group-item pull-left" style="display: inline-block;">
-                        <div class="list-group-item h3">  {{ event.time }} <a href="{% url 'event_details' event.id %}">Кто
-                            идет?</a><br> <br></div>
-                        {{ event.description }}<br>
+                <div class="list-group-item h3">  {{ event.time }} <a href="{% url 'event_details' event.id %}">Кто
+                    идет?</a><br> <br>
+                    {{ event.description }}<br>
+                    <br>
+                    {{ event.place.name }} <img src="{{ MEDIA_URL }}{{ event.place.photo }}" width="128px;"
+                                                height="128px;"><br><br>
+                    {{ event.type.name }} <img src="{{ MEDIA_URL }}{{ event.type.icon }}" width="128px;"
+                                               height="128px;">
 
-                    </li>
-                    <div class="table pull-right" style="display: inline-block; width: 50%;">
-                        <table class="table table-responsive">
-                            <tbody>
-                            <tr>
-                                <th>Важная деталь</th>
-                                <td>{{ event.time }}</td>
-                            </tr>
-                            <tr>
-                                <th>Блабла</th>
-                                <td>{{ event.description }}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
+                    <form method="post" action="{% url 'go' event.id %}">
+                        {% csrf_token %}
+                        <button class="btn btn-primary">Я пойду!</button>
+                    </form>
                 </div>
             {% endfor %}
         </ul>

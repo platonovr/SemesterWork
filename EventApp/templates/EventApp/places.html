@@ -1,0 +1,26 @@
+{% extends "EventApp/base.html" %}
+
+{% block page %}
+    <form action="{% url 'create_place' %}">
+        <input type="submit" class="btn btn-info" value="Создать место"/>
+    </form>
+    {% if places %}
+        <ul class="list-group" style="width: 50%">
+
+            {% for p in places %}
+                <h2>{{ p.name }}</h2>
+                <div class="list-group-item h3">
+                    <p><i>{{ p.description }}</i></p>
+                    <br>
+                    <img src="{{ MEDIA_URL }}{{ p.photo }}" width="128px;"
+                         height="128px;"><br>
+
+                    <p>{{ p.url }}</p>
+                </div>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p> No available places</p>
+    {% endif %}
+
+{% endblock %}
