@@ -1,11 +1,13 @@
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
 from django.shortcuts import render_to_response
+from django.template import RequestContext
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView
 from EventApp.forms import LoginForm, PlaceForm, TypeForm
@@ -102,6 +104,8 @@ def sign_in(request):
         if f.is_valid():
             user = authenticate(username=f.cleaned_data["username"], password=f.cleaned_data["password"])
             if user:
+                if not request.POST.get('remember_me', None):
+                    request.session.set_expiry(0)
                 login(request, user)
                 return HttpResponseRedirect(reverse('menu'))
             else:
@@ -150,3 +154,30 @@ def go(request, event_id):
         event.user.add(user)
         event.save()
         return HttpResponseRedirect(reverse("events"))
+
+
+@no_auth_please
+def registration(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid:
+            new_user = form.save()
+            return HttpResponseRedirect(reverse("sign_in"))
+    else:
+        form = UserCreationForm()
+        return render_to_response('EventApp/registration.html', {'form': form},
+                                  context_instance=RequestContext(request))
+
+
+@login_required(login_url=reverse_lazy("sign_in"))
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return HttpResponseRedirect(reverse("menu"))
+    else:
+        form = PasswordChangeForm(user=request.user)
+        return render_to_response('EventApp/change_password.html', {'form': form},
+                                  context_instance=RequestContext(request))

@@ -10,7 +10,7 @@ class UserProfile(models.Model):
     vk = models.TextField()
     gender = models.CharField(max_length=140)
     birth_date = models.DateField()
-    user = models.OneToOneField(User, unique=True)
+    user = models.OneToOneField(User, unique=True, related_name='profile')
 
 
 class Type(models.Model):
@@ -45,6 +45,7 @@ class Comment(models.Model):
     text = models.CharField(max_length=2048)
     date = models.DateTimeField()
     event = models.ForeignKey(Event)
+    user = models.ForeignKey(User, blank=True, null=True)
 
 
 class Debt(models.Model):

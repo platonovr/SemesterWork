@@ -5,7 +5,7 @@
         <input type="submit" class="btn btn-info" value="Создать место"/>
     </form>
     {% if places %}
-        <ul class="list-group" style="width: 50%">
+         <ul class="list-group" style="width: 50%">
 
             {% for p in places %}
                 <h2>{{ p.name }}</h2>
@@ -19,6 +19,7 @@
                 </div>
             {% endfor %}
         </ul>
+
     {% else %}
         <p> No available places</p>
     {% endif %}

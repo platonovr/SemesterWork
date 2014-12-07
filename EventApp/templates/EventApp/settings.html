@@ -3,7 +3,9 @@
 {% block content %}
     <div class="panel panel-info">
         <div class="panel-body">
-            <button class="btn btn-danger">Сменить пароль</button>
+            <form action="{% url 'change_password' %}">
+                <input type="submit" value="Сменить пароль" class="btn btn-danger">
+            </form>
             <table class="table table-responsive">
                 <tbody>
                 <tr>

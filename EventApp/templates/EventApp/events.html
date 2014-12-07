@@ -2,6 +2,20 @@
 
 
 {% block content %}
+    <script type="text/javascript">
+        $(function () {
+            $("#go").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/go/",
+                    data: {
+                        'event_id': $(this).attr('id')
+                    }
+                }).done(function (msg) {
+                    $("#go_btn").html("<button disabled>Вы пойдете</button>");
+                });
+            });
+        });</script>
     <div class="h1" style="margin-left: 10px;">
         События текущей недели
 
@@ -20,7 +34,7 @@
 
                     <form method="post" action="{% url 'go' event.id %}">
                         {% csrf_token %}
-                        <button class="btn btn-primary">Я пойду!</button>
+                        <button id="go" class="btn btn-primary">Я пойду!</button>
                     </form>
                 </div>
             {% endfor %}

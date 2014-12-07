@@ -1,5 +1,28 @@
-<form action='{% url "sign_in" %}' method="post">
-    {% csrf_token %}
-    {{ f.as_p }}
-    <input type="submit" value="OK"/>
-</form>
+<head>
+    <meta charset="UTF-8">
+    <link href="{{ STATIC_URL }}bootstrap-3.2.0-dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<div class="container" style="max-width: 100%; padding-top: 60px;">
+    <div class="row">
+
+        <div class="col-md-4">
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="panel panel-default">
+
+                <div class="panel-body">
+                    <form action='{% url "sign_in" %}' method="post">
+                        {% csrf_token %}
+                        {{ f.as_p }}
+
+                        <input type="submit" value="OK"/>
+                        <a href="{% url "registration" %}" style="float: right;">Registration</a>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

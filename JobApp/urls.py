@@ -13,5 +13,6 @@ urlpatterns = patterns('',
                            name='goals'),
                        url(r'^bills/', ListView.as_view(model=Bill, template_name="JobApp/bill_list.html"),
                            name='bills'),
+                       url(r'^task/$', 'JobApp.views.task_form', name='task_form'),
 
 )

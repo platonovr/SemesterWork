@@ -1,0 +1,13 @@
+{% extends "EventApp/base.html" %}
+
+{% block title %}Создание учетной записи{% endblock %}
+
+{% block content %}
+    <h1>Создание учетной записи</h1>
+
+    <form action="{% url 'registration' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Поехали">
+    </form>
+{% endblock %}
