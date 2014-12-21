@@ -25,7 +25,7 @@ urlpatterns = patterns('',
                        url(r'^create_place/', 'EventApp.views.create_place', name='create_place'),
                        url(r'^types/', TypeListView.as_view(), name='types'),
                        url(r'^create_type/', 'EventApp.views.create_type', name='create_type'),
-                       url(r'^go/(?P<event_id>\d+)', 'EventApp.views.go', name='go'),
+                       url(r'^go/$', 'EventApp.views.go', name='go'),
                        url(r'^registraion/', 'EventApp.views.registration', name='registration'),
                        url(r'^changepswd/', 'EventApp.views.change_password', name='change_password'),
 )

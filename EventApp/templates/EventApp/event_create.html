@@ -62,8 +62,11 @@
                 count.innerText = _length;
 
                 if (_length > 100) {
-                    error.innerText = 'Слишком много символов';
+                    error.innerText = 'Слишком длинное описание';
                     submitButton.disabled = true;
+                } else {
+                    submitButton.disabled = false;
+                    error.innerText = '';
                 }
             };
         </script>

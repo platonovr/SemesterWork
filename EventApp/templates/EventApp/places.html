@@ -5,21 +5,19 @@
         <input type="submit" class="btn btn-info" value="Создать место"/>
     </form>
     {% if places %}
-         <ul class="list-group" style="width: 50%">
-
+        <table class="table table-responsive table-bordered table-striped">
             {% for p in places %}
-                <h2>{{ p.name }}</h2>
-                <div class="list-group-item h3">
-                    <p><i>{{ p.description }}</i></p>
-                    <br>
-                    <img src="{{ MEDIA_URL }}{{ p.photo }}" width="128px;"
-                         height="128px;"><br>
+                <tr>
+                    <td>{{ p.name }}</td>
+                    <td>{{ p.description }}</td>
+                    <td>
+                        <img src="{{ MEDIA_URL }}{{ p.photo }}" width="128px;"
+                             height="128px;"></td>
 
-                    <p>{{ p.url }}</p>
-                </div>
+                    <td>{{ p.url }}</td>
+                </tr>
             {% endfor %}
-        </ul>
-
+        </table>
     {% else %}
         <p> No available places</p>
     {% endif %}

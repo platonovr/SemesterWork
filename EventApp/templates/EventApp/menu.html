@@ -2,9 +2,7 @@
 
 
 {% block page %}
-    <script type="text/javascript">
-        $(document).ready(function () {
-    </script>
+
 
     <ul class="nav nav-pills nav-stacked" role="tablist" style="width: 50%; margin-left: 10px;">
         <li style="display: inline-block;" role="presentation"><a href="{% url 'events' %}">События</a></li>
@@ -17,8 +15,22 @@
         <li style="display: inline-block;" role="presentation"><a href="{% url 'job:goals' %}">Цели</a></li>
         <li style="display: inline-block;" role="presentation"><input type="button" id="createGoal" value="Создать">
         </li>
-
+        <div class="modal fade" id="foo_modal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">Server Side Modal Popup Demo</div>
+                    <div class="modal-body"></div>
+                    <div class="modal-footer"></div>
+                </div>
+            </div>
+        </div>
         <li role="presentation"><a href="{% url 'job:bills' %}">Долги и счета</a></li>
     </ul>
+
+
+
+    <script type="text/javascript">
+
+    </script>
 
 {% endblock %}

@@ -63,13 +63,14 @@ def no_auth_please(v):
 
 @login_required(login_url=reverse_lazy("sign_in"))
 def menu(request):
-    return render(request, "EventApp/menu.html", {"user": request.user.username})
+    return render(request, "EventApp/menu.html", {"user": request.user})
 
 
 @login_required(login_url=reverse_lazy("sign_in"))
 def events(request):
     current_events = Event.objects.all()
-    return render(request, "EventApp/events.html", {"events": current_events})
+
+    return render(request, "EventApp/events.html", {"events": current_events, "user": request.user})
 
 
 @login_required(login_url=reverse_lazy("sign_in"))
@@ -147,8 +148,9 @@ def create_type(request):
 
 
 @login_required(login_url=reverse_lazy("sign_in"))
-def go(request, event_id):
+def go(request):
     if request.method == "POST":
+        event_id = request.POST.get('id', None)
         event = Event.objects.get(id=event_id)
         user = request.user
         event.user.add(user)
