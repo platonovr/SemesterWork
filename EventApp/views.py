@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.core.urlresolvers import reverse, reverse_lazy
+from django.db import connection
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
@@ -68,7 +69,20 @@ def menu(request):
 
 @login_required(login_url=reverse_lazy("sign_in"))
 def events(request):
-    current_events = Event.objects.all()
+    date_select = (request.GET.get("date_select"))
+    if date_select:
+        value = int(date_select)
+        if value == 1:
+            current_events = Event.objects.all()
+        if value == 2:
+            current_events = Event.objects.all()
+        elif value == 3:
+            userid = request.user.id
+            current_events = Event.objects.raw(
+                '''SELECT event.id , time as time, payment as payment,place_id, description as description,type_id FROM EventApp_event event INNER JOIN EventApp_event_user eu ON eu.event_id = event.id WHERE eu.user_id= %s''',
+                [userid])
+    else:
+        current_events = Event.objects.all()
 
     return render(request, "EventApp/events.html", {"events": current_events, "user": request.user})
 

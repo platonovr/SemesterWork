@@ -25,6 +25,22 @@
         Все события
 
     </div>
+    <div style="float: left;">
+        <form>
+            <label>
+                <select name="date_select" style="width: auto;margin-bottom: 20px;">
+                    <option value="1">Все события</option>
+                    <option value="2">События этой недели</option>
+                    <option value="3">События, на которые я иду</option>
+                </select>
+
+                <form action="{% url 'events' %}" method="get">
+                    <button>Поиск</button>
+                </form>
+            </label>
+
+        </form>
+    </div>
     {% if events %}
         <table class="table table-striped table-responsive">
             {% for event in events %}
