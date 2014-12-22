@@ -3,6 +3,10 @@
 
 {% block content %}
     <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#date-select").prop("selectedIndex", {{ selected }}-1);
+        });
         $(function () {
             $("[name='gobtn']").click(function () {
                 $(this).addClass('clicked');
@@ -22,16 +26,23 @@
             });
         });</script>
     <div class="h1" style="margin-left: 10px;">
-        Все события
+        {% if selected == 1 %}
+            Все события
+        {% elif selected == 2 %}
+            События этой недели
+        {% elif selected == 3 %}
+            События, на которые я иду
+        {% endif %}
 
     </div>
     <div style="float: left;">
-        <form>
+        <form style="display: inline-block;">
             <label>
-                <select name="date_select" style="width: auto;margin-bottom: 20px;">
+                <select id="date-select" name="date_select" style="width: auto;margin-bottom: 20px;">
                     <option value="1">Все события</option>
-                    <option value="2">События этой недели</option>
+                    <option value="2">Акутальные события</option>
                     <option value="3">События, на которые я иду</option>
+
                 </select>
 
                 <form action="{% url 'events' %}" method="get">
@@ -39,6 +50,13 @@
                 </form>
             </label>
 
+        </form>
+        <form style="display: inline-block; margin-right: 10px;">
+            <input name="description_search" type="text" placeholder="Введи описание"/>
+
+            <form action="{% url 'events' %}" method="get">
+                <button>Поиск по описанию</button>
+            </form>
         </form>
     </div>
     {% if events %}

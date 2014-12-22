@@ -1,3 +1,4 @@
+import datetime
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
@@ -69,22 +70,30 @@ def menu(request):
 
 @login_required(login_url=reverse_lazy("sign_in"))
 def events(request):
-    date_select = (request.GET.get("date_select"))
-    if date_select:
-        value = int(date_select)
-        if value == 1:
-            current_events = Event.objects.all()
-        if value == 2:
-            current_events = Event.objects.all()
-        elif value == 3:
-            userid = request.user.id
-            current_events = Event.objects.raw(
-                '''SELECT event.id , time as time, payment as payment,place_id, description as description,type_id FROM EventApp_event event INNER JOIN EventApp_event_user eu ON eu.event_id = event.id WHERE eu.user_id= %s''',
-                [userid])
+    global current_events, value
+    date_select = request.GET.get("date_select")
+    text_search = request.GET.get("description_search")
+    if text_search:
+        text_search = str(text_search)
+        current_events = Event.objects.filter(description__contains=text_search)
     else:
-        current_events = Event.objects.all()
+        if date_select:
+            value = int(date_select)
+            if value == 1:
+                current_events = Event.objects.all()
+            if value == 2:
+                yesterday = datetime.date.today() - datetime.timedelta(1)
+                current_events = Event.objects.filter(time__gt=yesterday)
+            elif value == 3:
+                userid = request.user.id
+                current_events = Event.objects.raw(
+                    '''SELECT event.id , time as time, payment as payment,place_id, description as description,type_id FROM EventApp_event event INNER JOIN EventApp_event_user eu ON eu.event_id = event.id WHERE eu.user_id= %s''',
+                    [userid])
+        else:
+            value = 1
+            current_events = Event.objects.all()
 
-    return render(request, "EventApp/events.html", {"events": current_events, "user": request.user})
+    return render(request, "EventApp/events.html", {"events": current_events, "user": request.user, "selected": value})
 
 
 @login_required(login_url=reverse_lazy("sign_in"))

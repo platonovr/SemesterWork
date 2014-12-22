@@ -4,7 +4,7 @@ from JobApp.models import Task, Goal, Bill
 
 
 urlpatterns = patterns('',
-                       url(r'^tasks/', ListView.as_view(model=Task, template_name="JobApp/task_list.html"),
+                       url(r'^tasks/', 'JobApp.views.tasks',
                            name='tasks'),
                        url(r'task_details/(?P<pk>\d+)/$',
                            DetailView.as_view(model=Task, template_name="JobApp/task_details.html"),

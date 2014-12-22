@@ -8,10 +8,12 @@
     <script src="{{ STATIC_URL }}jquery/jquery-ui-1.11.2/jquery-ui-1.11.2/jquery-ui.js"></script>
     <script type="javascript" src="{{ STATIC_URL }}bootstrap-3.2.0-dist/js/bootstrap.js"></script>
     <link rel="stylesheet" href="{{ STATIC_URL }}jquery/jquery-ui-1.11.2/jquery-ui-1.11.2/jquery-ui.css">
+    <link href="{{ STATIC_URL }}css/main.css" rel="stylesheet">
     {% block head %}
         <div class="page page-header" style="border-bottom: 2px #000000;text-align: center; ">
             {% block title %}
                 Hello, {{ user }} <img src="{{ MEDIA_URL }}{{ user.profile.photo }}" width="64px;" height="64px;">
+                {{ user.task.length }}
             {% endblock %}
         </div>
         {% block menu %}

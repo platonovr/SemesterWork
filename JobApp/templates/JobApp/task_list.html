@@ -1,97 +1,52 @@
 {% extends 'EventApp/base.html' %}
 
 {% block page %}
-    <style type="text/css">#integration-list ul {
-        padding: 0;
-        margin: 20px 0;
-        font-family: Arial, sans serif;
-        color: #555;
-    }
 
-    #integration-list ul > li {
-        list-style: none;
-        border-top: 1px solid #ddd;
-        display: block;
-        padding: 15px;
-        overflow: hidden;
-    }
 
-    #integration-list ul:last-child {
-        border-bottom: 1px solid #ddd;
-    }
+    <form action="{% url 'job:task_form' %}" style="margin-bottom: 10px;">
+        <input type="submit" class="btn btn-info" value="Создать задачу"/>
+    </form>
 
-    #integration-list ul > li:hover {
-        background: #efefef;
-    }
+    <form style="display: inline-block; margin-right: 10px;">
+        <input name="search_string" type="text" placeholder="Введи описание"/>
 
-    .button {
-        padding: 8px 12px;
-        font-size: 14px;
-        background: #ccc;
-        display: block: width : 200 px;
-        border-radius: 3px;
-        cursor: pointer;
-    }
+        <form action="{% url 'job:tasks' %}" method="get">
+            <button>Поиск по тексту</button>
+        </form>
+    </form>
 
-    .expand {
-        display: block;
-        text-decoration: none;
-        color: #555;
-        cursor: pointer;
-    }
+    <form style="display: inline-block; margin-right: 10px; float: right;">
+        <label>
+            Показать легкие
+            <input type="checkbox" name="priority"/>
+        </label>
 
-    h2 {
-        padding: 0;
-        margin: 0 0 5px 0;
-        font-size: 18px;
-    }
+        <form action="{% url 'events' %}" method="get">
+            <button>Показать легкие задачи</button>
+        </form>
+    </form>
 
-    span {
-        font-size: 14px;
-    }
-
-    .detail {
-        margin: 20px 0 0 0;
-        display: none;
-        line-height: 22px;
-    }
-
-    .right-arrow {
-        width: 10px;
-        height: 10px;
-        float: left;
-        font-weight: bold;
-        font-size: 20px;
-        margin: 15px 15px 0 0;
-    }
-    </style>
-    <div id="integration-list">
+    <table class="table table-striped table-bordered">
         {% for t in task_list %}
 
+            <tr>
+                <td>
+                    <a class="expand" href="{% url 'job:task_details' t.id %}">Детали</a>
+                </td>
+                <td>
+                    {{ t.name }}
+                </td>
+                <td>
+                    {{ t.hours }} часов
+                </td>
+                <td>
+                    {{ t.critical_hours }}
+                </td>
+                <td>{{ t.description }}</td>
+            </tr>
 
-            <ul>
-                <li>
-                    <a class="expand" href="{% url 'job:task_details' t.id %}">
-                        <div class="right-arrow">+</div>
-                        <div class="icon london"></div>
-                        <h2>{{ t.name }}
-                        </h2>
-
-                        <span>{{ t.hours }}</span>
-                    </a>
-
-                    <div class="detail">
-                        <div><span>{{ t.description }}</span>
-                        </div>
-                        <br/>
-
-                        <span class="button">Connect</span>
-                    </div>
-                </li>
-
-
-            </ul>
         {% endfor %}
-    </div>
+    </table>
+
 
 {% endblock %}

@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView
 from EventApp.models import Event
 from EventApp.views import PlaceListView, TypeListView
 from SemesterWork import settings
@@ -26,7 +26,7 @@ urlpatterns = patterns('',
                        url(r'^types/', TypeListView.as_view(), name='types'),
                        url(r'^create_type/', 'EventApp.views.create_type', name='create_type'),
                        url(r'^go/$', 'EventApp.views.go', name='go'),
-                       url(r'^registraion/', 'EventApp.views.registration', name='registration'),
+                       url(r'^registration/', 'EventApp.views.registration', name='registration'),
                        url(r'^changepswd/', 'EventApp.views.change_password', name='change_password'),
 )
 
